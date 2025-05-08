@@ -7,6 +7,8 @@ Route::get("/", function () {
     return redirect()->route('tasks.index');
 });
 
+Route::view('/tasks/create','create');
+
 Route::get('/tasks', function () {
     return view('index',[
         'tasks'=>Task::latest()->where('completed',true)->get()
