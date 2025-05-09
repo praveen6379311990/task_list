@@ -8,4 +8,8 @@
     </div>
     @endforeach
 </div>
+<div>
+    {{ $tasks->count() }}
+    <nav>{{ $tasks->links() }}</nav>
+</div>
 @endsection

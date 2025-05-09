@@ -31,7 +31,7 @@ Route::put('/tasks/{task}',function(Task $task,TaskRequest $request){
 
 Route::get('/tasks', function () {
     return view('index',[
-        'tasks'=>Task::latest()->where('completed',true)->get()
+        'tasks'=>Task::latest()->paginate(3)
     ]);
 })->name('tasks.index');
 
@@ -40,6 +40,11 @@ Route::get('/tasks/{task}',function(Task $task){
         'task'=>$task
     ]);
 })->name('tasks.show');
+
+Route::delete('/tasks/{task}',function(Task $task){
+    $task->delete();
+    return redirect()->route('tasks.index')->with('success','Successfully Deleted');
+})->name('tasks.destroy');
 
 Route::fallback(function(){
     return 'fds';
